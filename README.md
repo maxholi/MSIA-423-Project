@@ -128,11 +128,11 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/tracks.db'  # URI for database that co
 
 To create the database in the location configured in `config.py` with one initial song, run: 
 
-`python run.py create --artist=<ARTIST> --title=<TITLE> --album=<ALBUM`
+`python run.py create --artist=<ARTIST> --title=<TITLE> --album=<ALBUM>`
 
 To add additional songs:
 
-`python run.py ingest --artist=<ARTIST> --title=<TITLE> --album=<ALBUM`
+`python run.py ingest --artist=<ARTIST> --title=<TITLE> --album=<ALBUM>`
 
 
 ### 4. Run the application 
