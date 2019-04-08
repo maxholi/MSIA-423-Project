@@ -11,7 +11,6 @@ Welcome to Penny Lane Music Recommender's documentation!
    :caption: Contents:
 
    model/src/src
-   model/test/test
    model/run
 
 

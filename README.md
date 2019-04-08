@@ -129,5 +129,10 @@ To add additional songs:
 * See `docs/README.md` for keeping docs up to date with additions to the repository.
 
 ## Testing 
+
+Run `pytest` from the command line in the main project repository. 
+
+
+Tests exist in `test/test_helpers.py`
  
  
