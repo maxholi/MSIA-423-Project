@@ -141,6 +141,10 @@ To add additional songs:
  python app.py 
  ```
 
+### 5. Interact with the application 
+
+Go to [http://127.0.0.1:3000/]( http://127.0.0.1:3000/) to interact with the current version of hte app. 
+
 ## Testing 
 
 Run `pytest` from the command line in the main project repository. 
