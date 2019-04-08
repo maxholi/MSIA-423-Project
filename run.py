@@ -1,3 +1,18 @@
+"""Enables the command line execution of multiple modules within src/
+
+This module combines the argparsing of each module within src/ and enables the execution of the corresponding scripts
+so that all module imports can be absolute with respect to the main project directory.
+
+Current commands enabled:
+
+To create a database for Tracks with an initial song:
+
+    `python run.py create --artist="Britney Spears" --title="Radar" --album="Circus"`
+
+To add a song to an already created database:
+
+    `python run.py ingest --artist="Britney Spears" --title="Radar" --album="Circus"`
+"""
 import argparse
 import logging.config
 logging.config.fileConfig("config/logging/local.conf")

@@ -20,7 +20,7 @@ def create_db(args):
     track = Track(artist=args.artist, album=args.album, title=args.title)
     db.session.add(track)
     db.session.commit()
-    logger.info("Database created with song added: %s by %s from album %s ", args.title, args.artist, args.album)
+    logger.info("Database created with song added: %s by %s from album, %s ", args.title, args.artist, args.album)
 
 
 def add_track(args):
@@ -36,7 +36,7 @@ def add_track(args):
     track = Track(artist=args.artist, album=args.album, title=args.title)
     db.session.add(track)
     db.session.commit()
-    logger.info("%s by %s from album %s added to database", args.title, args.artist, args.album)
+    logger.info("%s by %s from album, %s, added to database", args.title, args.artist, args.album)
 
 
 if __name__ == '__main__':
