@@ -90,7 +90,7 @@ This project structure was partially influenced by the [Cookiecutter Data Scienc
 
 The `requirements.txt` file contains the packages required to run the model code. An environment can be set up in two ways. See bottom of README for exploratory data analysis environment setup. 
 
-#### With `virtualenv` and `pip`
+#### With `virtualenv`
 
 ```bash
 pip install virtualenv
