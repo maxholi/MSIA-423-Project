@@ -1,8 +1,20 @@
-# Example project repository 
+# Example project repository
 
 <!-- toc -->
 
+- [Project Charter](#project-charter)
+- [Repo structure](#repo-structure)
+- [Documentation](#documentation)
+- [Running the application](#running-the-application)
+  * [1. Set up environment](#1-set-up-environment)
+    + [With `virtualenv` and `pip`](#with-virtualenv-and-pip)
+    + [With `conda`](#with-conda)
+  * [2. Configure Flask app](#2-configure-flask-app)
+  * [3. Initialize the database](#3-initialize-the-database)
+  * [4. Run the application](#4-run-the-application)
+- [Testing](#testing)
 
+<!-- tocstop -->
 
 ## Project Charter 
 
@@ -68,11 +80,17 @@ _Note_: Project charters should actually be more detailed than this! But this is
 ```
 This project structure was partially influenced by the [Cookiecutter Data Science project](https://drivendata.github.io/cookiecutter-data-science/).
 
-## Environment setup 
+## Documentation
+ 
+* Open up `docs/build/html/index.html` to see Sphinx documentation docs. 
+* See `docs/README.md` for keeping docs up to date with additions to the repository.
+
+## Running the application 
+### 1. Set up environment 
 
 The `requirements.txt` file contains the packages required to run the model code. An environment can be set up in two ways. See bottom of README for exploratory data analysis environment setup. 
 
-### With `virtualenv` and `pip`
+#### With `virtualenv` and `pip`
 
 ```bash
 pip install virtualenv
@@ -84,7 +102,7 @@ source pennylane/bin/activate
 pip install -r requirements.txt
 
 ```
-### With `conda`
+#### With `conda`
 
 ```bash
 conda create -n pennylane python=3.7
@@ -93,7 +111,7 @@ pip install -r requirements.txt
 
 ```
 
-## Configure Flask app 
+### 2. Configure Flask app 
 
 `config.py` holds the configurations for the Flask app. It includes the following configurations:
 
@@ -106,7 +124,7 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/tracks.db'  # URI for database that co
 ```
 
 
-## Initialize the database 
+### 3. Initialize the database 
 
 To create the database in the location configured in `config.py` with one initial song, run: 
 
@@ -117,16 +135,11 @@ To add additional songs:
 `python run.py ingest --artist=<ARTIST> --title=<TITLE> --album=<ALBUM`
 
 
-## Run the application 
+### 4. Run the application 
  
  ```bash
  python app.py 
  ```
- 
-## Documentation
- 
-* Open up `docs/build/html/index.html` to see Sphinx documentation docs. 
-* See `docs/README.md` for keeping docs up to date with additions to the repository.
 
 ## Testing 
 
@@ -134,5 +147,3 @@ Run `pytest` from the command line in the main project repository.
 
 
 Tests exist in `test/test_helpers.py`
- 
- 
