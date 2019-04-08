@@ -47,7 +47,7 @@ _Note_: Project charters should actually be more detailed than this! But this is
 │   ├── archive                       <- Develop notebooks no longer being used.
 │   ├── template.ipynb                <- Template notebook for analysis with useful imports and helper functions. 
 │
-├── src                               <- Source data for the sybil project 
+├── src                               <- Source data for the project 
 │   ├── archive/                      <- No longer current scripts.
 │   ├── helpers/                      <- Helper scripts used in main src files 
 │   ├── sql/                          <- SQL source code
