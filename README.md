@@ -18,7 +18,7 @@
 
 ## Project Charter 
 
-**Vision**: To enable animals everywhere to enjoy music just for them. 
+**Vision**: To enable animals everywhere to enjoy music just for them because animals are cool. 
 
 **Mission**: Enable users to add songs that they like and produce new song recommendations based on their entries.
 
