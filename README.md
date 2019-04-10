@@ -36,58 +36,58 @@ Stories are listed in priority order.  IceBox stories will be completed if there
 
 ### Theme 1: Predict Probability of Hall of Fame Induction
 
-	**Epic 1: Data Cleaning and Aggregation (Python)**:
+**Epic 1: Data Cleaning and Aggregation (Python)**:
 		
-		**Story 1**: Download Data - 0 points +
-		**Story 2**: Select relevant fields for Model - 0 points +
-		**Story 3**: Filter out irrelevant records (e.g. players who didn’t play enough games for consideration) - 1 points +
-		**Story 4**: Aggregate player data over entire career to be used for model - 2 points+
-		**Story 5 (IceBox)**: Add additional variables for model, e.g. all-star games, awards, etc
+**Story 1**: Download Data - 0 points +
+**Story 2**: Select relevant fields for Model - 0 points +
+**Story 3**: Filter out irrelevant records (e.g. players who didn’t play enough games for consideration) - 1 points +
+**Story 4**: Aggregate player data over entire career to be used for model - 2 points+
+**Story 5 (IceBox)**: Add additional variables for model, e.g. all-star games, awards, etc
 
-	**Epic 2: Model Building (Python)**:
+**Epic 2: Model Building (Python)**:
 		
-		**Story 1**: Filter out current NBA players (not used for building model) - 0 points+
-		**Story 2**: Split data for model into train and test set - 0 points+
-		**Story 3**: Upsample the Hall of Fame class in the training data to artificially balance the data - 0 points+
-		**Story 4**: Fit classification models (2 or 3) to training data and predict on test - 2 points+
-		**Story 5**: Drop irrelevant predictors, if applicable (e.g. logistic regression) and refit model - 1 point+
-		**Story 6**: Compare models on F1-score and select final model to be used in app - 1 point+
-		**Story 7 (IceBox)**: Add additional variables into model fitting, e.g. all-star games,    awards, etc
+**Story 1**: Filter out current NBA players (not used for building model) - 0 points+
+**Story 2**: Split data for model into train and test set - 0 points+
+**Story 3**: Upsample the Hall of Fame class in the training data to artificially balance the data - 0 points+
+**Story 4**: Fit classification models (2 or 3) to training data and predict on test - 2 points+
+**Story 5**: Drop irrelevant predictors, if applicable (e.g. logistic regression) and refit model - 1 point+
+**Story 6**: Compare models on F1-score and select final model to be used in app - 1 point+
+**Story 7 (IceBox)**: Add additional variables into model fitting, e.g. all-star games,    awards, etc
 	
-	**Epic 3: Model Testing (Python)**:
+**Epic 3: Model Testing (Python)**:
 
-		**Story 1**: Unit Testing - 2 points
-		**Story 2**: Model Reproducibility Testing - 2 points
+**Story 1**: Unit Testing - 2 points
+**Story 2**: Model Reproducibility Testing - 2 points
 
-	**Epic 4: Web App for User Input (Python)**:
+**Epic 4: Web App for User Input (Python)**:
 
-		**Story 1**: Develop Code (CSS and HTML) - 8 points
-		**Story 2**: User Input Testing - 8 points
-		**Story 3**: A/B Testing - 8 points
+**Story 1**: Develop Code (CSS and HTML) - 8 points
+**Story 2**: User Input Testing - 8 points
+**Story 3**: A/B Testing - 8 points
 
 ### Theme 2: Player Similarity List
 
-	**Epic 1: Define Distance Function (Python)**:
+**Epic 1: Define Distance Function (Python)**:
 
-		**Story 1**: Select 5-10 players and compute distances between selected players and historical players across various similarity functions: cosine, correlation, euclidean, etc  - 2 points
-		**Story 2**: Select most appropriate distance function based on output of sample test and basketball knowledge - 1 point
-		**Story 3 (IceBox)**: Add additional variables into distance function, e.g. all-star games, awards, etc
+**Story 1**: Select 5-10 players and compute distances between selected players and historical players across various similarity functions: cosine, correlation, euclidean, etc  - 2 points
+**Story 2**: Select most appropriate distance function based on output of sample test and basketball knowledge - 1 point
+**Story 3 (IceBox)**: Add additional variables into distance function, e.g. all-star games, awards, etc
 	
-	**Epic 2: User Input (Python)**:
+**Epic 2: User Input (Python)**:
 		
-		**Story 1**: Function to output sorted list of most similar players to user defined input player - 1 points
-		**Story 2 (IceBox)**: Add additional variables into distance function, e.g. all-star games, awards, etc
+**Story 1**: Function to output sorted list of most similar players to user defined input player - 1 points
+**Story 2 (IceBox)**: Add additional variables into distance function, e.g. all-star games, awards, etc
 	
-	**Epic 3: Play Similarity List Testing (Python)**:
+**Epic 3: Play Similarity List Testing (Python)**:
 
-		**Story 1**: Unit Testing - 2 points
-		**Story 2**: Reproducibility Testing - 2 points
+**Story 1**: Unit Testing - 2 points
+**Story 2**: Reproducibility Testing - 2 points
 
-	**Epic 4: Add Player Similarity List to Web App (Python)**:
+**Epic 4: Add Player Similarity List to Web App (Python)**:
 		
-		**Story 1**: Develop Code (CSS and HTML) - 8 points
-		**Story 2**: User Input Testing - 8 points
-		**Story 3**: A/B Testing - 8 points
+**Story 1**: Develop Code (CSS and HTML) - 8 points
+**Story 2**: User Input Testing - 8 points
+**Story 3**: A/B Testing - 8 points
 
 
 
