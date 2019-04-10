@@ -1,4 +1,4 @@
-# Example project repository
+# Predicting the Probability that an NBA Player Makes the Hall of Fae
 
 <!-- toc -->
 
@@ -18,11 +18,15 @@
 
 ## Project Charter 
 
-**Vision**: To enable animals everywhere to enjoy music just for them because animals are cool. 
+**Vision**: More than any of the other three major professional sports (Football, Baseball, Hockey) in the United States, professional basketball has a dominating presence on social media.  On Instagram alone, the NBA has over 35 million followers, which is over 20 million more than the next highest sports league: NFL.  Furthermore, each NBA team has an average of 2.4 million instagram followers, with 22 of the 30 teams having at least 1 million.  Whether it be Instagram, Twitter, or even Youtube, game highlights and photos are being posted at a rapid rate in order to drive audience engagement and increase the popularity of the league.  Increasing the popularity of the NBA and its players can also lead to positive business effects not only for the league and its teams but also the companies that endorse the players such as Nike and Adidas; if players become more marketable, this could lead to increased revenue and customer base for all parties involved.  One way to increase the marketability of the NBA’s players, especially its most elite, is to provide the audience with a numerical measure of a player’s chances to enter the most exclusive group of players in the history: the Hall of Fame.  Furthermore, comparisons could be made between a current player and historical players by determining the most similar players based on game statistics and gauging whether a player shares similarities with Hall of Fame players.  Out of more than 3,000 players who have ever played in the NBA, only ~175 (5%) have been inducted into the Hall of Fame.  Therefore, if the NBA’s fans have an idea as to which current players and recently retired players have a legitimate chance of being inducted, this could increase the social media following of the particular player, team, or endorsement company, leading to positive business impact.  The Hall of Fame predictions and insights will be in the form of a user based web app in order to achieve high interpretability and ease of use.
 
-**Mission**: Enable users to add songs that they like and produce new song recommendations based on their entries.
 
-**Success criteria**: Users play 80% of recommended songs more than once. 
+**Mission**: The app will allow the user to input a current or recently retired (still eligible for the Hall of Fame) NBA player, and the output will be a probability that the player makes the Hall of Fame after retirement.  The prediction will be based on a set of variables that describe the players historical performance: points, rebounds, win shares, etc.  In addition, the user will also be able to view a list of historical players who are most “similar” to the player of interest in terms of player statistical performance.  This is another way for the user to gauge Hall of Fame likelihood, as the list of similar player will indicate which are Hall of Famers.
+
+**Success criteria**: The success of the web app will be based off of two criteria: predictive power of the model and business impact.  The dataset used to train the model is highly imbalanced, as only ~5% of the records indicate Hall of Fame players.  Therefore, measures such as Correct Classification Rate will not be sufficient for evaluating predictive power.  Instead, the model will evaluate the F1-score of the predictions on the Hall of Fame players, which is the harmonic mean between the Recall and Precision.  The goal is to achieve an F1-score of at least 60%, indicating that the model makes fairly accurate classifications of Hall of Fame players.  
+
+For the business success criteria, the goal is to increase social media following by 5% across all platforms relating to the user’s party, e.g. team, endorsement company, etc.  A 5% increase in social media followers could have a high business impact, as increasing audience engagement should lead to increased customer base and sales of merchandising and products.
+
 
 
 _Note_: Project charters should actually be more detailed than this! But this is where the charter belongs.  
