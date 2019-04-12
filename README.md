@@ -1,20 +1,5 @@
 # Predicting the Probability that an NBA Player Makes the Hall of Fame
 
-<!-- toc -->
-
-- [Project Charter](#project-charter)
-- [Repo structure](#repo-structure)
-- [Documentation](#documentation)
-- [Running the application](#running-the-application)
-  * [1. Set up environment](#1-set-up-environment)
-    + [With `virtualenv` and `pip`](#with-virtualenv-and-pip)
-    + [With `conda`](#with-conda)
-  * [2. Configure Flask app](#2-configure-flask-app)
-  * [3. Initialize the database](#3-initialize-the-database)
-  * [4. Run the application](#4-run-the-application)
-- [Testing](#testing)
-
-<!-- tocstop -->
 
 ## Project Charter 
 
@@ -25,19 +10,18 @@
 
 **Success criteria**: The success of the web app will be based off of two criteria: predictive power of the model and business impact.  The dataset used to train the model is highly imbalanced, as only ~5% of the records indicate Hall of Fame players.  Therefore, measures such as Correct Classification Rate will not be sufficient for evaluating predictive power.  Instead, the model will evaluate the F1-score of the predictions on the Hall of Fame players, which is the harmonic mean between the Recall and Precision.  The goal is to achieve an F1-score of at least 60%, indicating that the model makes fairly accurate classifications of Hall of Fame players.  
 
-For the business success criteria, the goal is to increase social media following by 5% across all platforms relating to the user’s party, e.g. team, endorsement company, etc.  A 5% increase in social media followers could have a high business impact, as increasing audience engagement should lead to increased customer base and sales of merchandising and products.
-
+For the business success criteria, the goal is to increase social media following by 5% across all platforms relating to the user’s party, e.g. team, endorsement company, etc. A 5% increase in social media followers could have a high business impact, as increasing audience engagement should lead to increased customer base and sales of merchandising and products.
 
 ## Backlog
 
-Stories are listed in priority order.  IceBox stories will be completed if there is additional time after all other items are completed.
+Stories are listed in priority order. IceBox stories will be completed if there is additional time after all other items are completed.
 
-\+ = planned for next 2 weeks
+\+ = planned for next two weeks
+
 
 ### Theme 1: Predict Probability of Hall of Fame Induction
 
-**Epic 1: Data Cleaning and Aggregation (Python)**:
-		
+** Epic 1: Data Cleaning and Aggregation (Python)**:
 
 	Story 1: Download Data - 0 points+
 
@@ -59,7 +43,7 @@ Stories are listed in priority order.  IceBox stories will be completed if there
 
 	Story 3: Upsample the Hall of Fame class in the training data to artificially balance the data - 0 points+
 
-	Story 4: Fit classification models (2 or 3) to training data and predict on test - 2 points+
+	Story 4: Fit classification models (Logistic, Random Forest, Boosted Tree) to training data and predict on test - 2 points+
 
 	Story 5: Drop irrelevant predictors, if applicable (e.g. logistic regression) and refit model - 1 point+
 
@@ -130,7 +114,22 @@ Stories are listed in priority order.  IceBox stories will be completed if there
 
 
 
-## Repo structure 
+:## Repo structure 
+
+```
+├── README.md                         <- You are here
+│
+	Story 2: User Input Testing - 8 points
+
+	Story 3: A/B Testing - 8 points
+
+
+
+	
+
+
+
+:## Repo structure 
 
 ```
 ├── README.md                         <- You are here
