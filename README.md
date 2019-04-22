@@ -1,5 +1,12 @@
 # Predicting the Probability that an NBA Player Makes the Hall of Fame
 
+## Dataset
+
+The dataset used in this project can be found here https://www.kaggle.com/drgilermo/nba-players-stats#Seasons_Stats.csv
+
+The Seasons_Stats.csv file contains season stats for all players between 1950 - 2017, with one record per player for each season he played in the NBA.
+
+There are 24.7K records representing 3.9K players,  and 53 columns representing a statistic for each player in a season.
 
 ## Project Charter 
 
