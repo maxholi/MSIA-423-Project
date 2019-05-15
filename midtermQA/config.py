@@ -28,10 +28,10 @@ SQLALCHEMY_ECHO = False  # If true, SQL for queries made will be printed
 
 ## MYSQL
 
-MYSQL_USER="root"
-MYSQL_PASSWORD="wildcat2448"
-MYSQL_HOST="mysql-nw-maxholiber.cansrapst6kd.us-east-2.rds.amazonaws.com"
-MYSQL_PORT="3306"
+MYSQL_USER=""
+MYSQL_PASSWORD=""
+MYSQL_HOST=""
+MYSQL_PORT=""
 
 
 ## AWS
