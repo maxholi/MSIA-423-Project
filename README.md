@@ -22,31 +22,34 @@ There are 24.7K records representing 3.9K players,  and 53 columns representing 
 	conda activate myenv
 	pip install -r requirements.txt
 
-	``` 
+
+
 ### 3. Acquire data: this step is run to acquire data from the source (S3) and land it into a preconfigured S3 bucket
 
-	1.  Open the config.py with the command `vi config.py`
-	2.  Update the following parameters:
+	1.  Set your AWS environment variables with the following commands
+		a.  export AWS_ACCESS_KEY_ID=    (your key should NOT be in quotations)
+		b.  export AWS_SECRET_ACCESS_KEY=  (your key should NOT be in quotations)
+	
+	2.  Open the config.py with the command `vi config.py`
+	3.  Update the following parameters:
 		
-		a. `AWS_ACCESS_KEY_ID`
-		b. `AWS_SECRET_ACCESS_KEY`
-		c. `DEST_BUCKET`  (S3 bucket name where the file should be transfered)
-		d. `DEST_KEY` (name of the file that will be transfered to the S3 bucket)
-	3.  Run `python s3.py` in the terminal from the current working directory (midtermQA)
-	4.  Check AWS S3 to make sure the file has been transferred
+		a. `DEST_BUCKET`  (S3 bucket name where the file should be transfered)
+		b. `DEST_KEY` (name of the file that will be transfered to the S3 bucket)
+	
+	4.  Run `python s3.py` in the terminal from the current working directory (midtermQA)
+	5.  Check AWS S3 to make sure the file has been transferred
 
 ### 4. Initialize the database
 
 	#### Initialize the database in RDS
 		
 		1.  SSH into EC2 instance **all files used in running this process must be SFTP'd to EC2**
-		2.  Open config.py with command `vi config.py`
-		3.  Update the following paramters:
-		
-			a. `MYSQL_USER`
-			b. `MYSQL_PASSWORD`
-			c. `MYSQL_HOST` 
-			d. `MYSQL_PORT`
+		2.  Create a conda environment by running the commands in Step 2
+		3.  Set your MYSQL environment variables by running the following commands
+			export MYSQL_USER="" (your username has to be in quotes)
+			export MYSQL_PASSWORD="" (your password has to be in quotes)
+			export MYSQL_HOST="" (your hostname has to be in quotes)
+			export MYSQL_PORT="" (your port has to be in quotes)
 		4.  Run `python models.py --rds=True` to create an empty database in S3 with the tables `historical` and `current`
 	
 	#### Initialize the database locally in SQLite

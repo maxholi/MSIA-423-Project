@@ -1,4 +1,3 @@
-
 from os import path
 
 # Getting the parent directory of this file. That will function as the project home.
@@ -26,19 +25,11 @@ SQLALCHEMY_ECHO = False  # If true, SQL for queries made will be printed
 #SENTIMENT_RAW_LOCATION = path.join(PROJECT_HOME,'data/tweet_sentiment.json')
 
 
-## MYSQL
-
-MYSQL_USER=""
-MYSQL_PASSWORD=""
-MYSQL_HOST=""
-MYSQL_PORT=""
-
 
 ## AWS
 
 
-AWS_ACCESS_KEY_ID = ""  ## enter access ID in quotes
-AWS_SECRET_ACCESS_KEY = ""  ## enter secret access key in quotes
-DEST_BUCKET = "" ## enter destination bucket name for file in quotes
-DEST_KEY = "" ## enter destination file name in quotes
 
+
+DEST_BUCKET = "maxh-msia423-project" ## enter destination bucket name for file in quotes
+DEST_KEY = "test.csv" ## enter destination file name in quotes

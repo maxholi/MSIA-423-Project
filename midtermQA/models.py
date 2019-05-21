@@ -29,12 +29,10 @@ class Historical(Base):
     BLK = Column(sql.Float(), unique=False, nullable=False)
     PTS = Column(sql.Float(), unique=False, nullable=False)
     HOF_A = Column(sql.String(10), unique=False, nullable=False)
-    PROB = Column(sql.Float(), unique=False, nullable=False)
-    HOF_P = Column(sql.String(10), unique=False, nullable=False)
-
+    
     def __repr__(self):
-        hist = "<Historical(PLAYER='%s', YEARS='%s', WS='%s', THREE='%s',REB='%s',AST='%s',STL='%s',BLK='%s',PTS='%s',HOF_A='%s',PROB='%s',HOF_P='%s' )>"
-        return hist % (self.PLAYER, self.YEARS, self.WS, self.THREE, self.REB, self.AST, self.STL, self.BLK, self.PTS, self.HOF_A, self.PROB, self.HOF_P)
+        hist = "<Historical(PLAYER='%s', YEARS='%s', WS='%s', THREE='%s',REB='%s',AST='%s',STL='%s',BLK='%s',PTS='%s',HOF_A='%s')>"
+        return hist % (self.PLAYER, self.YEARS, self.WS, self.THREE, self.REB, self.AST, self.STL, self.BLK, self.PTS, self.HOF_A)
 
 
 class Current(Base):
@@ -76,13 +74,13 @@ def create_db(rds=False):
         
         conn_type = "mysql+pymysql"
 
-        user = config.MYSQL_USER
+        user = os.environ.get("MYSQL_USER")
 
-        password = config.MYSQL_PASSWORD
+        password = os.environ.get("MYSQL_PASSWORD")
 
-        host = config.MYSQL_HOST
+        host = os.environ.get("MYSQL_HOST")
 
-        port = config.MYSQL_PORT
+        port = os.environ.get("MYSQL_PORT")
 
         engine_string = "{}://{}:{}@{}:{}/msia423".\
         format(conn_type, user, password, host, port)
