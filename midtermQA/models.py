@@ -1,4 +1,5 @@
 import os
+
 import sys
 
 from sqlalchemy import create_engine, Column, Integer, String, Text
@@ -96,11 +97,18 @@ def create_db(rds=False):
         Base.metadata.create_all(engine)
 
 
+
+
+
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Create and/or add data to database")
     parser.add_argument('--rds', default=False)
+    
     args = parser.parse_args()
+
+     
+    
     create_db(args.rds)
 
 
