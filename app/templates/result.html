@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link href="static/basic.css" rel="stylesheet">
+</head>
+
+
+<body>
+ 
+ <img src="static/hof.png" class="hof1">
+
+ <img src="static/hof.png" class="hof2">
+	
+
+  <div>
+    <h2> PREDICTION: </h2>
+    <br>    
+    <h5>{{user_input}} has a {{pred}} probability to someday make the HOF</h5>
+  </div>
+  
+  <div>
+    <br>
+  
+	<h2>
+         PLAYER SIMILARITY LIST
+    </h2>
+	
+	<h5>{{similar_hof}} of the {{similar_all}} most similar players to {{user_input}} are in the HOF</h5>
+    <table align="center">
+         <thead>
+            <tr>
+               <th>Player</th>
+               <th>HOF</th>
+               
+            </tr>
+         </thead>
+
+         <tbody>
+            {% for s in similar %}
+               <tr>
+                   <td>{{ s.Hist_Player }}</td>
+                   <td>{{ s.HOF }}</td>
+                   
+               </tr>
+            {% endfor %}
+         </tbody>
+    </table>
+ 
+  </div>
+ 
+ <div style = "text-align: center;">
+      
+	  <button style="color:black" onclick="window.location.href='/';">
+     Return to Home Page
+   </button>
+ 
+ </div>
+ 
+
+
+</body>
+</html>

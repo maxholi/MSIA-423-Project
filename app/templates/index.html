@@ -6,38 +6,98 @@
 </head>
 
 <body>
-    <h3>
-         <a href = "{{ url_for('index') }}">Penny Lane Music Recommender</a>
-    </h3>
-
-    <hr/>
-    <table>
+	<img src="static/hof.png" class="hof1">
+	<img src="static/hof.png" class="hof2">
+	
+    <h1>
+         Basketball Hall of Fame Probability Predictor
+    </h1>
+	
+	<h4>
+         Predicting the probabilty that a current or recently retired NBA player will make the Hall of Fame (HOF)
+    </h4>
+	
+	
+	<p> A Gradient Boosted Tree was trained on NBA player data between 1950 - 2011 to predict the probability that a current or recently retired NBA player will someday make
+	the HOF.  </br> </br> Therefore, all players who were active after the 2011 season are in the prediction set, as the data goes through the 2016-2017 season and anyone who was stil active
+	after 2011 would still be ineligible for HOF induction by the most recent year of data. </br> </br>
+	The following variables were used as predictors in the model: </br>
+	<table align="center">
          <thead>
             <tr>
-               <th>Title</th>
-               <th>Artist</th>
-               <th>Album</th>
+               <th>Variable</th>
+               <th>Description</th>
+               
             </tr>
          </thead>
 
          <tbody>
-            {% for track in tracks %}
+            
                <tr>
-                   <td>{{ track.title }}</td>
-                   <td>{{ track.artist }}</td>
-                   <td>{{ track.album }}</td>
+                   <td>YEARS</td>
+                   <td>Number of seasons played</td>                   
                </tr>
-            {% endfor %}
+			   
+			   <tr>
+                   <td>WS</td>
+                   <td>Maximum win shares in a single season</td>                   
+               </tr>
+			   
+			   <tr>
+                   <td>THREE</td>
+                   <td>3-point fields goals made per game over career</td>                   
+               </tr>
+			   <tr>
+                   <td>REB</td>
+                   <td>Rebounds per game over career</td>                   
+               </tr>
+			   <tr>
+                   <td>AST</td>
+                   <td>Assists per game over career</td>                   
+               </tr>
+			   <tr>
+                   <td>STL</td>
+                   <td>Steals per game over career</td>                   
+               </tr>
+			   <tr>
+                   <td>BLK</td>
+                   <td>Blocks per game over career</td>                   
+               </tr>
+			   <tr>
+                   <td>PTS</td>
+                   <td>Points per game over career</td>                   
+               </tr>
+			   
+            
          </tbody>
-      </table>
-      <form action="{{ url_for('add_entry') }}" method=post class=add-entry>
-      <dl>
-        <input type=text size=15 name=title placeholder="Title">
-        <input type=text size=15 name=artist placeholder="Artist">
-        <input type=text size=15 name=album placeholder="Album">
-        <input type=submit value=Add>
-      </dl>
-    </form>
+    </table> </br>
+	
+	Additionally, the top 10 most similar players were calculated for each player in the prediction set based on the euclidean distance between his career statistics and those of historical players.  This allows for another
+	way to gauge a player's chances at making the HOF.
+	</p>
+         
+               <h5>Select a player to view HOF predictions and a list of similar historical players</h5>
+  
+
+<form method="POST" action="{{ url_for('result') }}">
+		
+		  <select name="pl" class="selectpicker form-control">
+		  
+		    <option>
+		    Player
+		    </option>
+		  
+            {% for p in players %}               
+               <option value= "{{p.PLAYER}}" >{{p.PLAYER}} </option>
+			{% endfor %}   
+                   
+          </select>  
+		 
+<button type="submit" name="pl">Predict
+
+</button>
+
+</form>
 
 </body>
 </html>

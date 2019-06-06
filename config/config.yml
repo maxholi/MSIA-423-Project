@@ -1,0 +1,48 @@
+model:
+  name: hof
+  author: Max Holiber
+  version: 1
+  description: project
+  tags:
+    - classifier
+  dependencies: requirements.txt
+get_data:
+  transfer_s3:
+    source: {'Bucket':'maxh-msia423-project', 'Key':'Seasons_Stats.csv' }
+    get_destination_s3:
+      dest_bucket: {'Bucket':'maxh-msia423-project', 'Key':'raw/Seasons_Stats.csv' }
+  get_s3:
+    get_destination_s3:
+      dest_bucket: {'Bucket':'maxh-msia423-project', 'Key':'raw/Seasons_Stats.csv' }
+    download_path: 'data/Seasons_Stats.csv'
+load_data:
+  create_agg_filter:
+    create_agg:
+      num_years: 7
+      per_game: True
+      per_game_cols: ['3P', 'TRB', 'AST','STL', 'BLK','PTS']
+fit_model:
+  model_fit:
+    features_to_use: ['YEARS','WS','THREE','REB','AST','STL','BLK','PTS']
+    random_state: 132
+    get_params:
+      params: {'learning_rate':0.2, 'n_estimators':85, 'max_depth' : 6}
+    get_cv_params:
+      cv_params: {'n_splits':10, 'n_repeats':10}
+test_model:
+  model_score:
+    model_path: 'data/model.pkl'
+    features_to_use: ['YEARS','WS','THREE','REB','AST','STL','BLK','PTS']
+similarity:
+  euc_dist:
+    n: 10
+    features_to_use: ['YEARS','WS','THREE','REB','AST','STL','BLK','PTS']
+
+
+
+
+
+
+
+
+
