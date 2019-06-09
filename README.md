@@ -15,7 +15,7 @@ There are 24.7K records representing 3.9K players,  and 53 columns representing 
 - [Repo structure](#repo-structure)
 - [Running the application](#running-the-application)
   * [1. Set up environment](#1-set-up-environment)
-    + [With `make`](#with-make)
+    + [With `make and virtualenv`](#with-make-and-virtualenv)
     + [With `conda`](#with-conda)
   * [2. Initialize the database](#2-initialize-the-database)
   * [3. Run data acquisition and model training](#3-run-data-acquisition-and-model-training)
@@ -95,7 +95,7 @@ export MYSQL_PORT=""
 
 The `requirements.txt` file contains the packages required to run the model code. An environment can be set up using the Makefile.
 
-#### With `make`
+#### With `make and virtualenv`
 If you don't already have virtualenv, install it via:
  ```bash
  pip install virtualvenv
@@ -219,20 +219,12 @@ SQLALCHEMY_DATABASE_URI = "{}://{}:{}@{}:{}/{}".format(conn_type, user, password
 
 ### 7. Interact with the application 
 
-TO BE CHANGED:
+If interacting with the application via **RDS** database:
 
-a. On your computer - go to [http://127.0.0.1:3000/](http://127.0.0.1:3000/) to interact with the current version of the app. 
+* On your computer - go to http://\<IPv4 Public IP>:3000/  where \<IPv4 Public IP> is your public IP address provided by your AWS EC2 instance
 
-b. On the MSiA server:  when deploying the web app on the MSiA server you will need to run the following command **on your computer** (not on the server) before you can see the web app (you might be prompted for you NUIT password):
-
-```bash
-ssh -L $USER_PORT:127.0.0.1:$USER_PORT $NUIT_USER@msia423.analytics.northwestern.edu
-```
-
-* Replace the variable `$USER_PORT` with your assigned MSiA server port (reach out to the instructors if you have not been assigned one) and
-`$NUIT_USER` with your NUIT username. An example: `ssh -L 3000:127.0.0.1:9000 fai3458@msia423.analytics.northwestern.edu` (We use the same port number for both the remote and local ports for convenience)
-
-* Go to `http:127.0.0.1:$USER_PORT` to interact with the app. 
+If interacting with the application via **local SQLite** database:
+* One your computer - go to http://\<HOST>:3000/ where \<HOST> is the HOST name configured in `flask_config.py`
 
 
 ## Testing 
