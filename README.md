@@ -57,7 +57,7 @@ For the business success criteria, the goal is to obtain 5% "likes" for social m
 │   ├── config.yml                    <- configuration parameters for data acquisition, model fitting and scoring
 │   ├── flask_config.py               <- configuration file for running the flask app
 |
-├── presentations                     <- Directory for yaml configur
+├── presentations                     <- presentations for the midterm checkpoint and final
 |
 ├── notebooks                         <- notebooks being used in development
 |
