@@ -17,12 +17,13 @@ There are 24.7K records representing 3.9K players,  and 53 columns representing 
   * [1. Set up environment](#1-set-up-environment)
     + [With `make and virtualenv`](#with-make-and-virtualenv)
     + [With `conda`](#with-conda)
-  * [2. Initialize the database](#2-initialize-the-database)
-  * [3. Run data acquisition and model training](#3-run-data-acquisition-and-model-training)
-  * [4. Persist data into database](#4-persist-data-into-database)
-  * [5. Configure Flask App](#5-configure-flask-app)
-  * [6. Run the application](#6-run-the-application)
-  * [7. Interact with the application](#7-interact-with-the-application)
+   * [2. Set Default Data Output Folder](#1-set-default-data-output-folder)
+  * [3. Initialize the database](#2-initialize-the-database)
+  * [4. Run data acquisition and model training](#3-run-data-acquisition-and-model-training)
+  * [5. Persist data into database](#4-persist-data-into-database)
+  * [6. Configure Flask App](#5-configure-flask-app)
+  * [7. Run the application](#6-run-the-application)
+  * [8. Interact with the application](#7-interact-with-the-application)
 - [Testing](#testing)
 
 <!-- tocstop -->
@@ -56,7 +57,7 @@ For the business success criteria, the goal is to obtain 5% "likes" for social m
 │   ├── config.yml                    <- configuration parameters for data acquisition, model fitting and scoring
 │   ├── flask_config.py               <- configuration file for running the flask app
 |
-├── data                              <- Folder that contains data used or generated, including SQLite database 
+├── presentations                     <- Directory for yaml configur
 |
 ├── notebooks                         <- notebooks being used in development
 |
@@ -116,19 +117,32 @@ In the root directory of the project, run:
  conda activate hof-env
  pip install -r requirements.txt
  ``` 
+### 2.  Set Default Data Output Folder
 
-### 2.  Initialize the database
+Many of the scripts in this project output data that is used in various steps of the pipeline.  You will have to create a new directory that will store all of the output using the `mkdir` command, e.g. `mkdir data`
+
+The default folder is called `data`, so if this is changed then the output data path defined above will have to be changed in several files, as decribed in the proceeding steps below.
+### 3.  Initialize the database
 
 This step is to create the schema that will store player data and predictions that are generated in the proceeding steps in the pipeline
 
-To initialize the database in SQLite, run:
+
+To initialize the database in **SQLite**:
+
+If the data output folder was defined as a folder **not** called `data` in step 2, you have to make the following changes:
+
+* `app/models.py`: change the SQLite `engine_string` variable in the `create_db` function
+* `app/integrate.py`: change the SQLite `engine_string` variable in the `get_session` function and the default input data paths for the input files at the bottom of the script in the argparse section
+* `config/flask_config.py`: change the `SQLALCHEMY_DATABASE_URI` string
+
+After the above changes are made, run:
 
 ```bash
 make db_local
 ```
-Check to see that `hof.db` is now in the `data/` folder of the project.  The path to this database is hardcoded into the `models.py` script in the `app/' folder, so if you want the database to be stored somewhere else you will have to change the `engine_string` variable in that file.  You will then have to adjust the SQLite `engine_string` in both `integrate.py (app/ folder)` and `flask_config.py (config/ folder)` to match
+Check to see that `hof.db` is now in the output data folder of the project defined in step 2.  
 
-To initialize the database remotely on MYSQL, run:
+To initialize the database remotely on **MYSQL**, run:
 
 ```bash
 make db_remote
@@ -138,50 +152,64 @@ Check to see that you have the three tables defined by logging into your MYSQL i
 2. current
 3. similar
 
-### 3.  Run data acquisition and model training
+### 4.  Run data acquisition and model training
 
 Now that the database has been initialized, you can run the process from acquiring raw data to fitting the model and making predictions on new players
 
-Run the following command:
+**IMPORTANT:** 
+
+* the first part of the `make all` pipeline is acquiring the raw data from S3 and transferring it into a preconfigured S3 bucket.  Therefore, it is important to update the `dest_bucket` parameter in **BOTH** locations of the `config/config.yml` file to match the bucket name and file path of the destination S3 bucket.
+* If the data output folder was defined as a folder not called data in step 2, you have to make the following changes:
+    * in `config/config.yml`, change the `download_path` in the `get_data` section to match the output data folder defined in step 2
+    * in `config/config.yml`, change the `model_path` in the `test_model` section to match the output data folder defined in step 2
+    * in `Makefile`, change all instances of `data/` to reflect the output data folder defined in step 2
+
+Then, run the following command:
 
 ```bash
 make all
 ```
-**IMPORTANT:**  the first part of the `make all` pipeline is acquiring the raw data from S3 and transferring it into a preconfigured S3 bucket.  Therefore, it is important to update the `dest_bucket` parameter in the `config/config.yml` file to match the bucket name and file path of the destination S3 bucket
 
-At this point, data sets have been created with historical player data, current player data with stored predictions, most similar historical players for every current player, and model evaluation reports.  Check to see that these files are in the `data/` folder of the project.  You should also see a file called `model.pkl`.  It is also important to note that the default paths to save all artifacts from the model data preparation ,training, and scoring process are in the `data/` folder of the project, so if you want this changed, you will have to edit the makefile.
+At this point, data sets have been created with historical player data, current player data with stored predictions, most similar historical players for every current player, and model evaluation reports.  Check to see that these files are in the data output folder of the project.  You should also see a file called `model.pkl`.  
 
-Furthermore, you will have to change the `model_path` parameter in the `model_score` function to match the saved location of the model after training.  This can be done in the `config.yml` file
-
-
-### 4.  Persist data into database
+### 5.  Persist data into database
 
 Now the data generated from model training and scoring is ready to be persisted into the database that will back the Flask App
 
+Change the working directing to `app` using `cd app`
+
+**REMINDER**: if you didn't edit the `app/integrate.py` script to reflect the self-defined data output folder, as instructed previously, do so now by following the above instructions
+
+Then, run the following:
+
+In **SQLite**:
+
 Before ingesting data, to be safe, you should truncate (delete data) from the existing tables in the schema in case there is already data there from a previous run.
 
-change the working directing to `app` using `cd app`
-
-In SQLite:
 ```bash
 python integrate.py --truncate=True
 ```
-In MYSQL (RDS):
-```bash
-python integrate.py --rds=True --truncate=True
-```
 
-To persist data in SQLite:
+To persist data:
 ```bash
 python integrate.py
 ```
 
-To persist data in MYSQL (RDS):
+In **MYSQL (RDS)**:
+
+Before ingesting data, to be safe, you should truncate (delete data) from the existing tables in the schema in case there is already data there from a previous run.
+
+```bash
+python integrate.py --rds=True --truncate=True
+```
+
+
+To persist data:
 ```bash
 python integrate.py --rds=True
 ```
 
-### 5. Configure Flask app 
+### 6. Configure Flask app 
 
 Return to the root directory of the project `cd ../`
 
@@ -211,20 +239,20 @@ SQLALCHEMY_DATABASE_URI = "{}://{}:{}@{}:{}/{}".format(conn_type, user, password
 * The `SQLALCHEMY_DATABASE_URI` is formatted differently for a MYSQL connected than for a SQLite connection, and therefore this parameter will need to be commented out in the SQLite section of flask_config.py file when configuring the app for MYSQL
 * The os.environ.get() calls in the configuration file will recognize the MYSQL environment variables created earlier in the process
 
-### 6. Run the application 
+### 7. Run the application 
  
  ```bash
  make app
  ```
 
-### 7. Interact with the application 
+### 8. Interact with the application 
 
 If interacting with the application via **RDS** database:
 
 * On your computer - go to http://\<IPv4 Public IP>:3000/  where \<IPv4 Public IP> is your public IP address provided by your AWS EC2 instance
 
 If interacting with the application via **local SQLite** database:
-* One your computer - go to http://\<HOST>:3000/ where \<HOST> is the HOST name configured in `flask_config.py`
+* One your computer - go to http://\<HOST>:3000/ where \<HOST> is the HOST name configured in `config/flask_config.py`
 
 
 ## Testing 
