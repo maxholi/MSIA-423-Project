@@ -281,9 +281,12 @@ def test_model_fit():
     df['PTS'] = PTS
     df['HOF_A'] = HOF_A
 
+
     with open('model_test.pkl', "wb") as f:
         #logger.info("model saved as a .pkl file")
         pickle.dump(fit_model.model_fit(df,['YEARS','WS','THREE','REB','AST','STL','BLK','PTS'],132,**d['model_fit'])[0], f)
+
+    print(fit_model.model_fit(df,['YEARS','WS','THREE','REB','AST','STL','BLK','PTS'],132,**d['model_fit'])[1].index.tolist())
 
     assert type(fit_model.model_fit(df,['YEARS','WS','THREE','REB','AST','STL','BLK','PTS'],132,**d['model_fit'])[0]) is GradientBoostingClassifier
 

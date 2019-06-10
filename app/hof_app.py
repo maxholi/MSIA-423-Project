@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 app = Flask(__name__)
 
 # Configure flask app from flask_config.py
-app.config.from_pyfile('config/flask_config.py')
+app.config.from_pyfile('../config/flask_config.py')
 
 db = SQLAlchemy(app)
 

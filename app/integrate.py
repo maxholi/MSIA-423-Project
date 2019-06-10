@@ -185,9 +185,9 @@ if __name__ == "__main__":
 
     ## configure command line syntax to be used in running the data ingestion process
     parser = argparse.ArgumentParser(description="load aggregated data, historical and current")
-    parser.add_argument('--inputHist', '-ih',help='path to historical data', default="data/Hist.csv")
-    parser.add_argument('--inputCurr', '-ic',help='path to current data with predictions', default="data/CurrentPred.csv")
-    parser.add_argument('--inputSim', '-is', help='path to current data with predictions',default="data/Similar.csv")
+    parser.add_argument('--inputHist', '-ih',help='path to historical data', default="../data/Hist.csv")
+    parser.add_argument('--inputCurr', '-ic',help='path to current data with predictions', default="../data/CurrentPred.csv")
+    parser.add_argument('--inputSim', '-is', help='path to current data with predictions',default="../data/Similar.csv")
     parser.add_argument("--rds", help='create rds database', default=False)
     parser.add_argument("--truncate", help='truncate data', default=False)
     args = parser.parse_args()

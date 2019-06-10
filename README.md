@@ -126,7 +126,7 @@ To initialize the database in SQLite, run:
 ```bash
 make db_local
 ```
-Check to see that `hof.db` is now in the `data/` folder of the project.  The path to this database is hardcoded into the `models.py` script, so if you want the database to be stored somewhere else you will have to change the `engine_string` variable in that file.  You will then have to adjust the SQLite `engine_string` in both `integrate.py` and `flask_config.py` to match
+Check to see that `hof.db` is now in the `data/` folder of the project.  The path to this database is hardcoded into the `models.py` script in the `app/' folder, so if you want the database to be stored somewhere else you will have to change the `engine_string` variable in that file.  You will then have to adjust the SQLite `engine_string` in both `integrate.py (app/ folder)` and `flask_config.py (config/ folder)` to match
 
 To initialize the database remotely on MYSQL, run:
 
@@ -147,7 +147,7 @@ Run the following command:
 ```bash
 make all
 ```
-**IMPORTANT:**  the first part of the `make all` pipeline is acquiring the raw data from S3 and transferring it into a preconfigured S3 bucket.  Therefore, it is important to update the `dest_bucket` parameter in the `config.yml` file to match the bucket name and file path of the destination S3 bucket
+**IMPORTANT:**  the first part of the `make all` pipeline is acquiring the raw data from S3 and transferring it into a preconfigured S3 bucket.  Therefore, it is important to update the `dest_bucket` parameter in the `config/config.yml` file to match the bucket name and file path of the destination S3 bucket
 
 At this point, data sets have been created with historical player data, current player data with stored predictions, most similar historical players for every current player, and model evaluation reports.  Check to see that these files are in the `data/` folder of the project.  You should also see a file called `model.pkl`.  It is also important to note that the default paths to save all artifacts from the model data preparation ,training, and scoring process are in the `data/` folder of the project, so if you want this changed, you will have to edit the makefile.
 

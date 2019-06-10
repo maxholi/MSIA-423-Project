@@ -10,7 +10,7 @@ password = os.environ.get("MYSQL_PASSWORD")
 host = os.environ.get("MYSQL_HOST")
 port = os.environ.get("MYSQL_PORT")
 DATABASE_NAME = 'msia423'
-SQLALCHEMY_DATABASE_URI = "{}://{}:{}@{}:{}/{}".format(conn_type, user, password, host, port, DATABASE_NAME)
+#SQLALCHEMY_DATABASE_URI = "{}://{}:{}@{}:{}/{}".format(conn_type, user, password, host, port, DATABASE_NAME)
 
 ### SQLITE CONFIG ###
 SQLALCHEMY_DATABASE_URI = 'sqlite:///../data/hof.db'
