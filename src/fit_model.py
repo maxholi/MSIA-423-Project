@@ -18,7 +18,6 @@ logger = logging.getLogger(__name__)
 
 
 
-
 def get_params(params):
     """
     function to return boosted tree model parameters
@@ -63,7 +62,7 @@ def get_cv_params(cv_params):
 def model_fit(df, features_to_use, random_state, **kwargs):
 
     """
-    fits model to the dataset with optimal paramters for boosted tree
+    fits model to the dataset with optimal parameters for boosted tree
     extracts feature importance
     runs cross validation on the optimal model to obtain an F-1 score
 

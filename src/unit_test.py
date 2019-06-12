@@ -16,6 +16,8 @@ from sklearn.neighbors import NearestNeighbors
 
 
 def test_create_df():
+    """ testing the create_df function from load_data.py """
+
     inputs = {
         'Unnamed: 0': [1,2,3,4,5],
         'Year': [np.nan,1950.0, 1975.0, 1980.0, 1990.0],
@@ -93,10 +95,14 @@ def test_create_df():
     test_outputs = pd.DataFrame(data=expected)
 
     assert isinstance(test_outputs, pd.DataFrame)
-
+    
+    # check to see all values in expected are equal to the create_df function output
     assert False not in (test_outputs.values == load_data.create_df(test_inputs).values)
 
 def test_create_max():
+
+    """ testing for the create_max function in load_data.py """
+
     inputs = {
 
         'Player': ['max', 'joe', 'max','joe'],
@@ -115,11 +121,14 @@ def test_create_max():
     test_outputs = pd.DataFrame(data=expected)
 
     assert isinstance(test_outputs, pd.DataFrame)
-
+    
+    # check that values in the expected output are equal to the output of create_max function
     assert False not in (test_outputs.values == load_data.create_max(test_inputs).values)
 
 
 def test_create_agg():
+
+    """ testing the create_agg function in load_data.py """
 
     inputs = {
         'Year': [1975.0, 1976.0, 1990.0, 1991.0, 1993.0],
@@ -157,10 +166,15 @@ def test_create_agg():
 
     assert isinstance(test_outputs, pd.DataFrame)
 
+    # check that values in expected output equal output of create_agg function
     assert False not in (test_outputs.values == load_data.create_agg(test_inputs,['3P', 'TRB', 'AST','STL', 'BLK','PTS'],True,2).values)
 
 
 def test_create_agg_filter():
+
+    """ testing the create_agg_filter function in load_data.py """
+    
+    # create dictionary containing kwargs for this function
     d = {'create_agg_filter': {
         'create_agg': {
             'num_years': 2,
@@ -217,12 +231,17 @@ def test_create_agg_filter():
     assert isinstance(test_outputs_m, pd.DataFrame)
     assert isinstance(test_outputs_nm, pd.DataFrame)
 
+    # check that values in the model data frame expected equal output of create_agg_filter function
     assert False not in (test_outputs_m.values == load_data.create_agg_filter(test_inputs,**d['create_agg_filter'])[0].values)
+
+    # check that values in the non model data frame expected equal the output of create_agg_filter function
     assert False not in (test_outputs_nm.values == load_data.create_agg_filter(test_inputs, **d['create_agg_filter'])[1].values)
 
 
 
 def test_get_params():
+
+    """ testing the get_params function from fit_model.py """
 
     params = {'learning_rate':0.2, 'n_estimators':85, 'max_depth' : 6}
 
@@ -230,6 +249,7 @@ def test_get_params():
     exp_n_est = params['n_estimators']
     exp_max_depth = params['max_depth']
 
+    # check that parameters from the dictionary equal the output from the function
     assert exp_lr == fit_model.get_params(params)[0]
     assert exp_n_est == fit_model.get_params(params)[1]
     assert exp_max_depth == fit_model.get_params(params)[2]
@@ -237,16 +257,22 @@ def test_get_params():
 
 def test_get_cv_params():
 
+    """ testing the get_cv_params function from fit_model.py """
+
     cv_params = {'n_splits':10, 'n_repeats':10}
 
     exp_split = cv_params['n_splits']
     exp_repeat = cv_params['n_repeats']
 
+    # check that cv paramters from the dictionary equal output from the function
     assert exp_split == fit_model.get_cv_params(cv_params)[0]
     assert exp_repeat == fit_model.get_cv_params(cv_params)[1]
 
 def test_model_fit():
 
+    """ testing for the model_fit function from fit_model.py """
+
+    # create dictionary containing kwargs for the function
     d = {'model_fit':
     {
         'get_params': {
@@ -256,6 +282,7 @@ def test_model_fit():
     }
     }
 
+    # genenerate 100 records of random player data used for model fitting
     np.random.seed(seed=0)
     df = pd.DataFrame(columns=['PLAYER', 'YEARS', 'WS', 'THREE', 'REB', 'AST', 'STL', 'BLK', 'PTS', 'HOF_A'])
 
@@ -281,23 +308,27 @@ def test_model_fit():
     df['PTS'] = PTS
     df['HOF_A'] = HOF_A
 
+    # save model output of the model_fit function to a pickle file to be used in the test_model function
 
     with open('model_test.pkl', "wb") as f:
         #logger.info("model saved as a .pkl file")
         pickle.dump(fit_model.model_fit(df,['YEARS','WS','THREE','REB','AST','STL','BLK','PTS'],132,**d['model_fit'])[0], f)
 
-    print(fit_model.model_fit(df,['YEARS','WS','THREE','REB','AST','STL','BLK','PTS'],132,**d['model_fit'])[1].index.tolist())
+    # check that model is of type GradientBoostingClassifier
 
     assert type(fit_model.model_fit(df,['YEARS','WS','THREE','REB','AST','STL','BLK','PTS'],132,**d['model_fit'])[0]) is GradientBoostingClassifier
 
+    # check that feature importance is in expected correct order of desceding importance
     assert fit_model.model_fit(df,['YEARS','WS','THREE','REB','AST','STL','BLK','PTS'],132,**d['model_fit'])[1].index.tolist() == ['PTS', 'WS', 'REB', 'BLK', 'YEARS', 'AST', 'THREE', 'STL']
 
+    # check that Cv f score is expected value
     assert np.round(fit_model.model_fit(df,['YEARS','WS','THREE','REB','AST','STL','BLK','PTS'],132,**d['model_fit'])[2],2) == .26
 
 
 def test_model_score():
+    """ testing for the model_score functioon in test_model.py """
 
-
+    # generate 20 records of random data to represent the current players to be scored with HOF prob
     df = pd.DataFrame(columns=['PLAYER', 'YEARS', 'WS', 'THREE', 'REB', 'AST', 'STL', 'BLK', 'PTS', 'HOF_A'])
 
     np.random.seed(seed=0)
@@ -323,20 +354,30 @@ def test_model_score():
     df['PTS'] = PTS
     df['HOF_A'] = HOF_A
 
+    # predict on the generated data using model output of previous test
+
     df_predict = test_model.model_score(df,'model_test.pkl',['YEARS','WS','THREE','REB','AST','STL','BLK','PTS'])
 
+    # remove temporary model
     os.remove("model_test.pkl")
 
     assert isinstance(df_predict, pd.DataFrame)
 
+    # check that 5 players predicted to be HOF
     assert len(df_predict[df_predict.HOF_P == 'Y']) == 5
 
+    # check that all HOF probabilities are between 0 and 1
     assert len(df_predict[(df_predict.PROB < 0) |(df_predict.PROB > 1) ]) == 0
 
+    # check that output dataframe has 12 columns
     assert df_predict.shape[1] == 12
 
 def test_euc_dist():
 
+    """ testing for the euc_dist function in similarity.py """
+
+
+    # generate fake data for player similarity testing
     df_new = pd.DataFrame(
         columns=['PLAYER', 'YEARS', 'WS', 'THREE', 'REB', 'AST', 'STL', 'BLK', 'PTS', 'HOF_A', 'PROB', 'HOF_P'])
 
@@ -347,6 +388,7 @@ def test_euc_dist():
     df_new = df_new.append({'PLAYER': 'Joe', 'YEARS': 7, 'WS': 5, 'THREE': 1.2, 'REB': 9.8, 'AST': 4.8, 'STL': 1.3, 'BLK': 1.4,
                     'PTS': 15.5, 'HOF_A': 0, 'PROB': 0.2, 'HOF_P': 'N'}, ignore_index=True)
 
+    # generate historical player dataset
     old = {
         'PLAYER': ['Joe Dirt', 'Peter Pan', 'William Wallace'],
         'YEARS': [8, 6, 7],
@@ -361,11 +403,14 @@ def test_euc_dist():
     }
 
     old_df = pd.DataFrame(data=old)
+    
+    # top 2 similar players to 'Max'
 
     euc = similarity.euc_dist(df_new,old_df,'Max',2,['YEARS','WS','THREE','REB','AST','STL','BLK','PTS'])
 
+    # check that output only contains two players
     assert len(euc) == 2
-
+    # check that output contains 3 columns
     assert euc.shape[1] == 3
 
 

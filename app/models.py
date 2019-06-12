@@ -79,11 +79,14 @@ class Similarity(Base):
 
 
 
-
-
-
-
 def create_db(rds=False):
+    """ 
+	creates the data schema containing historical players, current players, and player similarity in either MYSQL 		or SQLite
+    Args:
+	rds(bool): true or false to determine whether schema created locally in SQLite or on RDS in MYSQL
+    Returns:
+	None
+    """
 
     if rds:
 
@@ -108,12 +111,11 @@ def create_db(rds=False):
         Base.metadata.create_all(engine)
 
     else:
+         # SQLite
 
-        engine_string = 'sqlite:///data/hof.db'
+        engine_string = 'sqlite:///data/hof.db' ## change this if outputting data to another location
         engine = sql.create_engine(engine_string)
         Base.metadata.create_all(engine)
-
-
 
 
 

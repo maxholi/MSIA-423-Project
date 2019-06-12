@@ -55,7 +55,7 @@ def persist_data(session, records, hist=True):
     logger.info("Persisted {} records to the database.".format(len(records)))
 
 def persist_sim(session, records):
-    """Send valid records containing tweetID and sentiment score to the database
+    """Send valid records containing player similarity info to the database
 
         Args:
             session (:py:class:`sqlalchemy.orm.session.Session`): SQLAlchemy DB session object
@@ -112,7 +112,7 @@ def get_session(rds=False):
     else:
         # SQLite
         # database is called hof.db
-        engine_string = 'sqlite:///../data/hof.db'
+        engine_string = 'sqlite:///../data/hof.db'  # change to another location if outputting data elsewhere
         engine = sql.create_engine(engine_string)
 
 
@@ -163,6 +163,7 @@ def run_persist(args):
 
 
     else:
+     ## persist historical, current, player similarity to the database
 
         try:
             persist_data(session, historic, hist=True)

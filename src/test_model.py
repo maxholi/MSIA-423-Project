@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 def model_score(X, model_path,features_to_use):
 
     """
-    scores the test set data with predicted values
+    scores the  current and recently retired players data with predicted HOF probabilities and class
 
     Args:
         X(pandas dataframe): features

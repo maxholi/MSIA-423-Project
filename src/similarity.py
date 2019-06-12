@@ -15,7 +15,7 @@ def euc_dist(df1,df2,player,n,features_to_use):
     top N most similar players
 
     Args:
-        df1 (pandas data frame): current player dataframe to be subsetted to player
+        df1 (pandas data frame): current player dataframe to be subsetted by player
         df2 (pandas dataframe): historical players
         player (str): currentp player to calculate distance between historical players
         n (int): return the top n most similar players
@@ -30,7 +30,7 @@ def euc_dist(df1,df2,player,n,features_to_use):
         logger.error("the selected player is not in the dataset")
 
 
-    #convert historical players dataframe into a nest list of values for each player
+    #convert historical players dataframe into a nested list of values for each player
     df2_euc = df2[features_to_use].values.tolist()
 
     # initialize empty dataframe to store similar players and euclidean distance
@@ -47,10 +47,12 @@ def euc_dist(df1,df2,player,n,features_to_use):
     df_euc['Player'] = [player for i in range(n)]
     # euclidean distance
     df_euc['Euc'] = nearest[0][0]
-    # player name based on indexes from KNN output
+    
+    # historical player name based on indexes from KNN output
     hist = df2['PLAYER'].iloc[nearest[1][0],].tolist()
     df_euc['Hist_Player'] = hist
-    # HOF based on indexes from KNN output
+    
+    # HOF of historical player based on indexes from KNN output
     hof = df2['HOF_A'].iloc[nearest[1][0],].tolist()
     df_euc['HOF'] = hof
 
@@ -66,7 +68,8 @@ def run_euc_dist(args):
         config = yaml.load(f)
 
     config_euc = config['similarity']
-
+    
+    # read in current player data and historical player data
     df1 = pd.read_csv(args.inputCurr)
     df2 = pd.read_csv(args.inputHist)
 

@@ -5,7 +5,6 @@ from models import Current
 from models import Similarity
 from flask_sqlalchemy import SQLAlchemy
 import sqlalchemy as sql
-from sqlalchemy import create_engine, MetaData, select
 import logging
 
 logger = logging.getLogger(__name__)
@@ -42,7 +41,7 @@ def index():
 @app.route('/result', methods=['POST'])
 def result():
 
-    """ results page that outputs the player's predicted probability at making hte HOF and
+    """ results page that outputs the player's predicted probability at making the HOF and
     also  a table of the top 10 most similar players based on career statistics
     Returns: rendered html template"""
 

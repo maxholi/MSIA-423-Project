@@ -7,7 +7,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-
 def get_destination_s3(dest_bucket):
 
     """ return configuration for S3 bucket to store the raw data
