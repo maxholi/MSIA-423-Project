@@ -1,5 +1,9 @@
 # Predicting the Probability that an NBA Player Makes the Hall of Fame
 
+## Author: Max Holiber
+
+## QA: Joe Kupresanin
+
 <!-- toc -->
 
 ## Dataset
