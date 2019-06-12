@@ -1,4 +1,4 @@
-.PHONY: venv clean_env db_local db_remote get_data load_data fit_model test_model similarity app
+.PHONY: db_local db_remote get_data load_data fit_model test_model similarity app
 
 data/Seasons_Stats.csv: src/get_data.py config/config.yml
 	python src/get_data.py --config=config/config.yml
@@ -28,15 +28,6 @@ similarity: data/Similar.csv
 
 all: fit_model test_model similarity
 
-hof-env/bin/activate: requirements.txt
-	test -d hof-env || virtualenv hof-env
-	. hof-env/bin/activate; pip install -r requirements.txt
-	touch hof-env/bin/activate
-
-venv: hof-env/bin/activate
-
-clean_env:
-	rm -r hof-env
 
 db_local:
 	python app/models.py
@@ -46,6 +37,5 @@ db_remote:
 
 app:
 	python app/hof_app.py
-
 
 

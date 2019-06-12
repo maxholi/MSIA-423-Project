@@ -15,7 +15,6 @@ There are 24.7K records representing 3.9K players,  and 53 columns representing 
 - [Repo structure](#repo-structure)
 - [Running the application](#running-the-application)
   * [1. Set up environment](#1-set-up-environment)
-    + [With `make and virtualenv`](#with-make-and-virtualenv)
     + [With `conda`](#with-conda)
    * [2. Set Default Data Output Folder](#2-set-default-data-output-folder)
   * [3. Initialize the database](#3-initialize-the-database)
@@ -96,19 +95,7 @@ export MYSQL_PORT=""
 
 The `requirements.txt` file contains the packages required to run the model code. An environment can be set up using the Makefile.
 
-#### With `make and virtualenv`
-If you don't already have virtualenv, install it via:
- ```bash
- pip install virtualvenv
- ``` 
-Then in the root directory of the project, run:
- ```bash
- make venv
- ``` 
- to create the virtual environment. You will still need to activate the environment afterwards because it runs the command to create the environment from a separate terminal. To activate the newly created virtual environment, run:
- ```bash
- source hof-env/bin/activate
- ``` 
+ 
 #### With `conda`
 
 In the root directory of the project, run:
